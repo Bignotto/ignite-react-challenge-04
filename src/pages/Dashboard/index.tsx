@@ -19,6 +19,7 @@ import { FoodsContainer } from "./styles";
 //   }
 
 interface FoodInterface {
+  id: number;
   image: string;
   name: string;
   price: number;
@@ -54,8 +55,6 @@ export function Dashboard() {
   };
 
   const handleUpdateFood = async (food: FoodInterface) => {
-    // const { foods, editingFood } = this.state;
-
     try {
       const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
         ...editingFood,
@@ -66,20 +65,18 @@ export function Dashboard() {
         f.id !== foodUpdated.data.id ? f : foodUpdated.data
       );
 
-      this.setState({ foods: foodsUpdated });
+      setFoods(foodsUpdated);
     } catch (err) {
       console.log(err);
     }
   };
 
-  handleDeleteFood = async id => {
-    const { foods } = this.state;
-
+  const handleDeleteFood = async (id: number) => {
     await api.delete(`/foods/${id}`);
 
     const foodsFiltered = foods.filter(food => food.id !== id);
 
-    this.setState({ foods: foodsFiltered });
+    setFoods(foodsFiltered);
   };
 
   toggleModal = () => {
