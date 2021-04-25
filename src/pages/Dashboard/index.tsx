@@ -32,6 +32,8 @@ export function Dashboard() {
   const [editingFood, setEditingFood] = useState<FoodInterface>(
     {} as FoodInterface
   );
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     async function loadFoods() {
@@ -79,20 +81,24 @@ export function Dashboard() {
     setFoods(foodsFiltered);
   };
 
-  toggleModal = () => {
-    const { modalOpen } = this.state;
+  const toggleModal = () => {
+    // const { modalOpen } = this.state;
 
-    this.setState({ modalOpen: !modalOpen });
+    // this.setState({ modalOpen: !modalOpen });
+    setModalOpen(!modalOpen);
   };
 
-  toggleEditModal = () => {
-    const { editModalOpen } = this.state;
+  const toggleEditModal = () => {
+    // const { editModalOpen } = this.state;
 
-    this.setState({ editModalOpen: !editModalOpen });
+    // this.setState({ editModalOpen: !editModalOpen });
+    setEditModalOpen(!editModalOpen);
   };
 
-  handleEditFood = food => {
-    this.setState({ editingFood: food, editModalOpen: true });
+  const handleEditFood = (food: FoodInterface) => {
+    // this.setState({ editingFood: food, editModalOpen: true });
+    setEditingFood(food);
+    setEditModalOpen(true);
   };
 
   // render() {
@@ -100,17 +106,17 @@ export function Dashboard() {
 
   return (
     <>
-      <Header openModal={this.toggleModal} />
+      <Header openModal={toggleModal} />
       <ModalAddFood
         isOpen={modalOpen}
-        setIsOpen={this.toggleModal}
-        handleAddFood={this.handleAddFood}
+        setIsOpen={toggleModal}
+        handleAddFood={handleAddFood}
       />
       <ModalEditFood
         isOpen={editModalOpen}
-        setIsOpen={this.toggleEditModal}
+        setIsOpen={toggleEditModal}
         editingFood={editingFood}
-        handleUpdateFood={this.handleUpdateFood}
+        handleUpdateFood={handleUpdateFood}
       />
 
       <FoodsContainer data-testid="foods-list">
@@ -119,8 +125,8 @@ export function Dashboard() {
             <Food
               key={food.id}
               food={food}
-              handleDelete={this.handleDeleteFood}
-              handleEditFood={this.handleEditFood}
+              handleDelete={handleDeleteFood}
+              handleEditFood={handleEditFood}
             />
           ))}
       </FoodsContainer>
