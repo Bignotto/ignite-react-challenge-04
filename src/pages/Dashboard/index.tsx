@@ -28,6 +28,9 @@ interface FoodInterface {
 
 export function Dashboard() {
   const [foods, setFoods] = useState<FoodInterface[]>([]);
+  const [editingFood, setEditingFood] = useState<FoodInterface>(
+    {} as FoodInterface
+  );
 
   useEffect(() => {
     async function loadFoods() {
@@ -50,8 +53,8 @@ export function Dashboard() {
     }
   };
 
-  handleUpdateFood = async food => {
-    const { foods, editingFood } = this.state;
+  const handleUpdateFood = async (food: FoodInterface) => {
+    // const { foods, editingFood } = this.state;
 
     try {
       const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
