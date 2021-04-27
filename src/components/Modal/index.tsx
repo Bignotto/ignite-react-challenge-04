@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
+  setIsOpen: () => void;
 }
 
 export function Modal({ isOpen, children }: ModalProps) {
