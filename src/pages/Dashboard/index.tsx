@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Header } from "../../components/Header";
 import api from "../../services/api";
-import Food from "../../components/Food";
+import { Food } from "../../components/Food";
 import ModalAddFood from "../../components/ModalAddFood";
 import ModalEditFood from "../../components/ModalEditFood";
 import { FoodsContainer } from "./styles";
@@ -85,6 +85,7 @@ export function Dashboard() {
     // const { modalOpen } = this.state;
 
     // this.setState({ modalOpen: !modalOpen });
+    console.log("deve abrir addfood");
     setModalOpen(!modalOpen);
   };
 
@@ -92,13 +93,15 @@ export function Dashboard() {
     // const { editModalOpen } = this.state;
 
     // this.setState({ editModalOpen: !editModalOpen });
+    console.log("deve abrir editfood");
+
     setEditModalOpen(!editModalOpen);
   };
 
   const handleEditFood = (food: FoodInterface) => {
     // this.setState({ editingFood: food, editModalOpen: true });
     setEditingFood(food);
-    setEditModalOpen(true);
+    setEditModalOpen(!editModalOpen);
   };
 
   // render() {

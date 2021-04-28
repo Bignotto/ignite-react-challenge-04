@@ -7,7 +7,7 @@ interface ModalProps {
   setIsOpen: () => void;
 }
 
-export function Modal({ isOpen, children }: ModalProps) {
+export function Modal({ setIsOpen, isOpen, children }: ModalProps) {
   const [modalStatus, setModalStatus] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export function Modal({ isOpen, children }: ModalProps) {
 
   function handleCloseModal() {
     setModalStatus(false);
+    setIsOpen();
   }
 
   return (
